@@ -1,0 +1,12 @@
+[
+    {
+        "name": "Piłka nożna",
+        "description": "Piłka do nogi",
+        "price": 15.99
+    },
+    {
+        "name": "Piłka siatkowa",
+        "description": "Piłka do siatkówki",
+        "price": 19.99
+    }
+]
