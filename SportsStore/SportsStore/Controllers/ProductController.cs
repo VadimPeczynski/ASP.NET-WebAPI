@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using SportsStore.Model;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -11,16 +12,17 @@ namespace SportsStore.Controllers
     [Route("api/[controller]")]
     public class ProductController : Controller
     {
+        private readonly IProductRepository productRepository;
+
+        public ProductController(IProductRepository productRepository)
+        {
+            this.productRepository = productRepository;
+        }
         // GET: api/<controller>
         [HttpGet]
         public IEnumerable<Product> Get()
         {
-            return new Product[] { new Product
-                                       {
-                                           Name = "Piłka nożna",
-                                           Description = "Gała",
-                                           Price = 10.99m
-                                       }};
+            return productRepository.Products;
         }
 
         // GET api/<controller>/5
@@ -47,14 +49,5 @@ namespace SportsStore.Controllers
         public void Delete(int id)
         {
         }
-    }
-
-    public class Product
-    {
-        public string Name { get; set; }
-
-        public string Description { get; set; }
-
-        public decimal Price { get; set; }
     }
 }
