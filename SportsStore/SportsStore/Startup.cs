@@ -6,8 +6,10 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SportsStore.Model;
 
 namespace SportsStore
 {
@@ -24,6 +26,8 @@ namespace SportsStore
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            var connectionString = Configuration["Data:SportsStoreProducts:ConnectionString"];
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("SportsStore")));
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
