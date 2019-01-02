@@ -8,11 +8,5 @@ import { ProductService, IProduct } from './services/Product/product.service';
 })
 export class AppComponent {
   
-  products: IProduct[];
-  constructor(private productService:ProductService) {
-    this.productService.getProducts().subscribe((products:IProduct[]) => {
-      this.products = products;
-    });
-  }
   title = 'SportsStore';
 }

@@ -11,7 +11,11 @@ export class ProductService {
   constructor(private httpClient: HttpClient) { }
 
   getProducts(): Observable<IProduct[]>{
-    return this.httpClient.get<IProduct[]>(this._productUrl);
+    return this.httpClient.get<IProduct[]>(this._productUrl+"/getProducts");
+  }
+
+  getCategories(): Observable<string[]>{
+    return this.httpClient.get<string[]>(this._productUrl+"/getCategories");
   }
 }
 
@@ -19,4 +23,5 @@ export interface IProduct{
    name: string;
    description: string;
    price: number;
+   category: string;
 }

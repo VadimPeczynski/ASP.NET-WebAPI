@@ -19,10 +19,16 @@ namespace SportsStore.Controllers
             this.productRepository = productRepository;
         }
         // GET: api/<controller>
-        [HttpGet]
-        public IEnumerable<Product> Get()
+        [HttpGet("getProducts")]
+        public IEnumerable<Product> GetProducts()
         {
             return productRepository.Products;
+        }
+
+        [HttpGet("getCategories")]
+        public IEnumerable<string> GetCategories()
+        {
+            return productRepository.Products.Select(x=>x.Category).Distinct();
         }
 
         // GET api/<controller>/5

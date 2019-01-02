@@ -1,0 +1,16 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/">SKLEP SPORTOWY</a>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+        <button class="btn btn-outline-primary btn-block m-1" [class.active]="!selectedCategory" (click)="changeCategory()">
+            Wszystkie
+          </button>
+      <app-category *ngFor="let category of categories" [category]="category" [selected]="selectedCategory" (categoryChanged)="changeCategory($event)"></app-category>
+    </div>
+    <div class="col-9">
+      <app-product *ngFor="let productParent of filteredProducts" [product]="productParent"></app-product>
+    </div>
+  </div>
+</div>
