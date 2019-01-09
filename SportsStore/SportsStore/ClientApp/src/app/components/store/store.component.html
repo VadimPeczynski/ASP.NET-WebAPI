@@ -8,6 +8,7 @@
             Wszystkie
           </button>
       <app-category *ngFor="let category of categories" [category]="category" [selected]="selectedCategory" (categoryChanged)="changeCategory($event)"></app-category>
+      <button class="btn btn-danger btn-block m-1" routerLink="/admin">Administracja</button>
     </div>
     <div class="col-9">
       <app-product *ngFor="let productParent of filteredProducts" [product]="productParent"></app-product>

@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { StoreComponent } from './components/store/store.component';
 import { ProductComponent } from './components/product/product.component';
 import { CategoryComponent } from './components/category/category.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,15 @@ import { CategoryComponent } from './components/category/category.component';
   ],
   imports: [
     BrowserModule,
-    HttpClientModule
+    HttpClientModule,
+    RouterModule.forRoot([
+      {path:"store",component:StoreComponent},
+      {
+        path:"admin",
+        loadChildren:"./admin/admin.module#AdminModule"
+      },
+      {path:"**",redirectTo:"store"},
+    ])
   ],
   providers: [],
   bootstrap: [AppComponent]
