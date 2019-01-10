@@ -25,9 +25,20 @@ namespace SportsStore
         // This method gets called by the runtime. Use this method to add services to the container.
         public IServiceProvider ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddMvcCore()
+                .AddAuthorization()
+                .AddJsonFormatters().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
             var connectionString = Configuration["Data:SportsStoreProducts:ConnectionString"];
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(connectionString, b => b.MigrationsAssembly("SportsStore")));
+
+            services.AddAuthentication("Bearer")
+                .AddJwtBearer("Bearer", options =>
+                {
+                    options.Authority = "https://localhost:44394";
+                    options.RequireHttpsMetadata = false;
+
+                    options.Audience = "api1";
+                });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
@@ -58,6 +69,8 @@ namespace SportsStore
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseSpaStaticFiles();
+            app.UseAuthentication();
+
 
             app.UseMvc(routes =>
             {
