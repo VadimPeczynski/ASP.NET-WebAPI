@@ -1,3 +1,16 @@
-<p>
-  admin works!
-</p>
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a class="navbar-brand" href="/admin">Administracja sklepem</a>
+</nav>
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+        <button class="btn btn-outline-primary btn-block m-1" routerLink="/admin/main/products">
+            Produkty
+          </button>
+      <button class="btn btn-danger btn-block m-1" (click)="logout()">Wyloguj</button>
+    </div>
+    <div class="col-9">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

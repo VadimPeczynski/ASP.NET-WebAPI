@@ -53,8 +53,10 @@ namespace SportsStore.Controllers
 
         // DELETE api/<controller>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        [Authorize]
+        public int Delete(int id)
         {
+            return productRepository.Delete(id);
         }
     }
 }

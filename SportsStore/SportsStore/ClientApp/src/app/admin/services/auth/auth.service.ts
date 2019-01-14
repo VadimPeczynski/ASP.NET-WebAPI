@@ -8,7 +8,7 @@ import { isNullOrUndefined } from 'util';
 export class AuthService {
 
   private auth_token: string;
-  private _tokenUrl = 'connect/token';
+  private _tokenUrl = 'https://localhost:44394/connect/token';
   private httpOptions = {
     headers: new HttpHeaders({
       'Content-Type': 'application/x-www-form-urlencoded'
@@ -17,6 +17,13 @@ export class AuthService {
 
   constructor(private _http: HttpClient) { }
 
+  clear(){
+    this.auth_token = null;
+  }
+
+  getToken():string{
+    return this.auth_token;
+  }
   get authenticated(){
     return !isNullOrUndefined(this.auth_token);
   }
